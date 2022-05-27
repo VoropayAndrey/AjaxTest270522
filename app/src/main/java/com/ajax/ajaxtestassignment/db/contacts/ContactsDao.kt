@@ -16,6 +16,12 @@ interface ContactsDao {
     @Query("DELETE FROM Contact WHERE id = (:contactId)")
     suspend fun deleteById(contactId: Int)
 
+    @Query("SELECT * FROM contact WHERE id IN (:contactIds)")
+    fun loadAllByIds(contactIds: IntArray): List<DbContact>
+
     @Query("DELETE FROM Contact")
     suspend fun deleteAll()
+
+    @Insert
+    fun insertAll(vararg users: DbContact)
 }

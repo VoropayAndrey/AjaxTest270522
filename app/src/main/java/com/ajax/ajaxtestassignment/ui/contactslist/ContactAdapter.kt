@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ajax.ajaxtestassignment.databinding.ItemContactListBinding
+import com.ajax.ajaxtestassignment.domain.entities.ContactEntity
+import java.util.*
 
 class ContactAdapter (
     private val context: Activity,
     private val onItemClicked: ItemClick
 ) : RecyclerView.Adapter<ViewHolder>() {
 
-    var items: List<String> = listOf("Text")
+    var items: List<ContactEntity> = ArrayList<ContactEntity>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -26,7 +28,8 @@ class ContactAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         with(holder.binding) {
-            text.text = items[position]
+            firstName.text = items[position].firstName
+            lastName.text = items[position].lastName
             root.setOnClickListener {
                 onItemClicked(item)
             }
@@ -40,4 +43,4 @@ class ContactAdapter (
 
 class ViewHolder (val binding: ItemContactListBinding) : RecyclerView.ViewHolder(binding.root)
 
-typealias ItemClick = (String) -> Unit
+typealias ItemClick = (ContactEntity) -> Unit
