@@ -8,7 +8,8 @@ class SettingsRepositoryImplementation(private val sharedPreferences: SharedPref
     val IS_FIRST_RUN = "IS_FIRST_RUN"
 
     override fun isFirstRun(): Boolean {
-        return true//return sharedPreferences.getBoolean(IS_FIRST_RUN, true)
+        //return true
+        return sharedPreferences.getBoolean(IS_FIRST_RUN, true)
     }
 
     override fun setFirstRun(isFirstRun: Boolean) {

@@ -28,7 +28,10 @@ class RemoteRepositoryImplementation: RemoteRepositoryInterface {
 
     override suspend fun requestContact(): List<ContactEntity> {
         var responseList = service.getContacts().results?.map {
-            ContactEntity(firstName = it.name?.firstName!!, lastName = it.name.lastName!!)
+            ContactEntity(firstName = it.name?.firstName!!,
+                lastName = it.name.lastName!!,
+                photoURL = it.picture?.medium!!,
+                email = it.email!!)
         }
         return responseList!!
     }

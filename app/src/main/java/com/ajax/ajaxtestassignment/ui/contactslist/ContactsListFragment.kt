@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajax.ajaxtestassignment.databinding.FragmentContactsListBinding
 import com.ajax.ajaxtestassignment.di.GlobalFactory
 import com.ajax.ajaxtestassignment.domain.entities.ContactEntity
+import com.ajax.ajaxtestassignment.ui.details.DetailsViewModel
 
 open class ContactsListFragment : Fragment() {
 
@@ -28,7 +30,7 @@ open class ContactsListFragment : Fragment() {
 
     private var binding: FragmentContactsListBinding? = null
 
-    lateinit var viewModel: ContactsListViewModel
+    private val contactsListViewModel by viewModels<ContactsListViewModel> { GlobalFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,14 +48,12 @@ open class ContactsListFragment : Fragment() {
             }
             .root
 
-        viewModel = GlobalFactory.create(ContactsListViewModel::class.java)
-
-        viewModel.contactsLiveData.observe(viewLifecycleOwner, Observer {
+        contactsListViewModel.contactsLiveData.observe(viewLifecycleOwner, Observer {
             contactAdapter.items = it
             contactAdapter.notifyDataSetChanged()
         })
 
-        viewModel.fetchUsers()
+        contactsListViewModel.fetchUsers()
         return view
     }
 

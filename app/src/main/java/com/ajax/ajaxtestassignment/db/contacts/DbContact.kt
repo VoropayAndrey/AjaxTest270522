@@ -6,9 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Contact")
 data class DbContact(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo val firstName: String?,
     @ColumnInfo val lastName: String?,
     @ColumnInfo val email: String?,
+    //@ColumnInfo val phone: String?,
     @ColumnInfo val photoURL: String?,
+
 )

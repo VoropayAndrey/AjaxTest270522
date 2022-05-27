@@ -1,6 +1,6 @@
 package com.ajax.ajaxtestassignment.domain.entities
 
-data class ContactEntity(val id: Int = 0,
+data class ContactEntity(var id: Int = 0,
                          val firstName: String,
                          val lastName: String,
                          val title: String = "Engineer",

@@ -33,6 +33,10 @@ class LocalRepositoryImplementation(private val context: Context,
         return contactToEntity(appDatabase.userDao().loadAllByIds(intArrayOf(id))[0])
     }
 
+    override suspend fun update(contact: ContactEntity) {
+        appDatabase.userDao().update(entityToContact(contact))
+    }
+
     private fun contactToEntity(contact: DbContact): ContactEntity {
         return ContactEntity(id = contact.id,
             firstName = contact.firstName!!,
@@ -43,7 +47,8 @@ class LocalRepositoryImplementation(private val context: Context,
     }
 
     private fun entityToContact(entity: ContactEntity): DbContact {
-        var contact = DbContact(firstName = entity.firstName,
+        var contact = DbContact(id = entity.id,
+            firstName = entity.firstName,
             lastName = entity.lastName,
             email = entity.email,
             //phone = entity.phone1,

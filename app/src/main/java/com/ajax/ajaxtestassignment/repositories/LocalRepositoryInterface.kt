@@ -7,4 +7,5 @@ interface LocalRepositoryInterface {
     suspend fun getAll(): List<ContactEntity>
     suspend fun deleteAll()
     suspend fun getById(id: Int): ContactEntity
+    suspend fun update(contact: ContactEntity)
 }
