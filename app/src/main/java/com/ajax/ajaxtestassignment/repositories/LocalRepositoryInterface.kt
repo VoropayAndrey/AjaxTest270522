@@ -8,4 +8,5 @@ interface LocalRepositoryInterface {
     suspend fun deleteAll()
     suspend fun getById(id: Int): ContactEntity
     suspend fun update(contact: ContactEntity)
+    suspend fun delete(contact: ContactEntity)
 }

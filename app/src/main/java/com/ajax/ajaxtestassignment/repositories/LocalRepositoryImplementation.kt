@@ -37,6 +37,10 @@ class LocalRepositoryImplementation(private val context: Context,
         appDatabase.userDao().update(entityToContact(contact))
     }
 
+    override suspend fun delete(contact: ContactEntity) {
+        appDatabase.userDao().deleteById(contact.id)
+    }
+
     private fun contactToEntity(contact: DbContact): ContactEntity {
         return ContactEntity(id = contact.id,
             firstName = contact.firstName!!,

@@ -10,7 +10,8 @@ import java.util.*
 
 class ContactAdapter (
     private val context: Activity,
-    private val onItemClicked: ItemClick
+    private val onItemClicked: ItemClick,
+    private val onDeleteClicked: ItemClick
 ) : RecyclerView.Adapter<ViewHolder>() {
 
     var items: List<ContactEntity> = ArrayList<ContactEntity>()
@@ -32,6 +33,9 @@ class ContactAdapter (
             lastName.text = items[position].lastName
             root.setOnClickListener {
                 onItemClicked(item)
+            }
+            deleteButton.setOnClickListener {
+                onDeleteClicked(item)
             }
         }
     }

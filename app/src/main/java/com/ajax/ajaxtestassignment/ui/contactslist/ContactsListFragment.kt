@@ -21,13 +21,18 @@ open class ContactsListFragment : Fragment() {
     private val contactAdapter: ContactAdapter by lazy {
         ContactAdapter(
             requireActivity(),
-            this::onContactClicked
+            this::onContactClicked,
+            this::onDeleteContactClicked
         )
     }
 
     private fun onContactClicked(entity: ContactEntity) {
         findNavController()
             .navigate(ContactsListFragmentDirections.actionContactListToDetails(entity.id.toString()))
+    }
+
+    private fun onDeleteContactClicked(entity: ContactEntity) {
+        contactsListViewModel.deleteUser(entity)
     }
 
     private var binding: FragmentContactsListBinding? = null

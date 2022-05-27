@@ -28,7 +28,6 @@ class ContactsListViewModel(val firstInitContactUseCase: UseCase,
                 }
             }
         }
-
     }
 
     fun reloadAll() {
@@ -40,6 +39,15 @@ class ContactsListViewModel(val firstInitContactUseCase: UseCase,
                     contactsLiveData.value = contacts
                 }
             }
+        }
+    }
+
+    fun deleteUser(contact: ContactEntity) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                localRepo.delete(contact)
+            }
+            reloadAll()
         }
     }
 }
